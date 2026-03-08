@@ -3,270 +3,660 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>码动未来，云端问道 | 2026年AI编程行业调研报告 </title>
-    <style>
-        /* 黑金配色 CSS 变量定义 */
-        :root {
-            --bg-color: #0a0a0c;
-            --bg-light: #16161a;
-            --gold-primary: #d4af37;
-            --gold-light: #f3e5ab;
-            --gold-dark: #aa8122;
-            --text-main: #e0e0e0;
-            --text-muted: #999999;
-            --border-gold: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif; /* 采用衬线体提升优雅感 */
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            color: var(--gold-primary);
-            font-weight: normal;
-        }
-
-        /* 顶部导航栏 */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 12, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: var(--border-gold);
-            z-index: 1000;
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        header h2 {
-            margin: 0;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            color: var(--gold-light);
-        }
-
-        /* 首屏头图区 */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #1a1a20 0%, #0a0a0c 100%);
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .hero p.subtitle {
-            font-size: 1.5rem;
-            color: var(--gold-light);
-            margin-bottom: 40px;
-            max-width: 800px;
-        }
-
-        .hero .team {
-            font-family: sans-serif;
-            color: var(--text-muted);
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
-
-        /* 内容容器 */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* 卷首语 */
-        .preface {
-            border-left: 4px solid var(--gold-primary);
-            padding-left: 20px;
-            margin: 40px 0;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--gold-light);
-            background: rgba(255, 255, 255, 0.02);
-            padding: 30px;
-        }
-
-        /* 章节通用样式 */
-        .section {
-            margin-bottom: 80px;
-            opacity: 0; /* 用于滚动动画 */
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 2px;
-            background-color: var(--gold-primary);
-            margin: 15px auto 0;
-        }
-
-        /* 卡片式布局（用于展示理论成果） */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-light);
-            border: var(--border-gold);
-            padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
-            border-color: var(--gold-primary);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-        }
-
-        /* 引用文献标记 */
-        .cite {
-            font-size: 0.8em;
-            color: var(--gold-dark);
-            vertical-align: super;
-        }
-
-        /* 页脚 */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: var(--border-gold);
-            background: var(--bg-light);
-            color: var(--text-muted);
-            font-family: sans-serif;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h2>码动未来 · 云端筑梦 [cite: 183]</h2>
-    </header>
-
-    <section class="hero">
-        <h1>码动未来，云端问道 </h1>
-        <p class="subtitle">2026年AI编程行业现状、开发者生存与技能重构调研报告 </p>
-        <p class="team">东南大学计软智学院 · 码动未来团队 [cite: 11] | 2026年寒假社会实践 [cite: 13]</p>
-    </section>
-
-    <div class="container">
-        <div class="section preface visible">
-            <p>“人工智能是引领这一轮科技革命和产业变革的战略性技术，具有溢出带动性很强的‘头雁’效应。” <span class="cite">[cite: 22]</span></p>
-            <p>站在2026年的时代潮头，生成式人工智能已不再是实验室里的星火，而是重塑全球软件工程范式的燎原之势。东南大学码动未来实践团深入产业一线，不仅是为了记录这一场技术变革的脉搏，更是为了探寻在算法洪流中寻找涌动的成长。<span class="cite">[cite: 23]</span></p>
-            <p>我们以青春之名，云端问道，只为码动未来。<span class="cite">[cite: 24]</span></p>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">核心摘要与时代背景</h2>
-            <p>当今世界正处于数字化与智能化高速发展的历史性交汇期，以大语言模型为核心的生成式人工智能正在深刻重塑全球软件工程的底层逻辑。<span class="cite"></span> 步入2026年，人工智能的发展正式跨越了以对话式交互为主的初级阶段，全面迈入以AI Agent为核心的自主行动时代。<span class="cite">[cite: 55]</span></p>
-            <p>截至2025年中期，GitHub Copilot的累计用户已突破2000万大关，在《财富》100强企业中的渗透率高达90%，并且生成了全球开发者平均46%的代码。<span class="cite">[cite: 55]</span> 然而，在技术普及率呈现指数级攀升的表象下，生产力幻觉与工程质量的断崖式下跌首当其冲。<span class="cite">[cite: 61]</span></p>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">深入一线：云端问道</h2>
-            <p>本次实践项目摒弃了传统走马观花式的浅层走访，采用了一套极其严密、逻辑自洽的“问题锚定——案头数据交叉——深度实地访谈——洞察提炼与重构”的实施路径。<span class="cite">[cite: 68]</span></p>
-            <p>2026年2月1日，实践团前往位于杭州市余杭区的阿里巴巴西溪园区，展开了本次调研的核心实地考察环节。<span class="cite">[cite: 79]</span> 在园区内，实践团与某核心事业部拥有二十年资深开发经验的“十年陈”技术专家进行了面对面对话，探讨了外部AI工具与内部数据主权之间的张力，以及Vibe Coding在复杂系统交付中的实际情况。<span class="cite">[cite: 81, 82, 84]</span></p>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">四大核心理论洞察</h2>
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>一、生产力悖论 <span class="cite">[cite: 92]</span></h3>
-                    <p>支撑“Vibe Coding”现象级繁荣的，大多数是被短视频营销吸引而来的非专业观光客。<span class="cite">[cite: 95]</span> METR研究机构对照试验显示，在处理复杂工程任务时，使用AI代码助手的开发者实际完成时间比纯人工组慢了19%，揭示了AI编程领域隐秘的生产力悖论。<span class="cite">[cite: 96, 97]</span></p>
-                </div>
-                <div class="card">
-                    <h3>二、数据主权保卫战 <span class="cite">[cite: 101]</span></h3>
-                    <p>代码是凝聚了海量算力测试、未公开业务逻辑的无价数字资产。<span class="cite">[cite: 106]</span> 2025年至2026年间，流向各类AI应用程序的企业私有数据猛增了93%。<span class="cite">[cite: 106]</span> 面对Agentic架构诱发的极速攻击面崩塌，建立基于本地化部署的主权工厂AI成为企业战略突围的必然。<span class="cite">[cite: 107, 108]</span></p>
-                </div>
-                <div class="card">
-                    <h3>三、60分开发者的狂欢 <span class="cite">[cite: 114]</span></h3>
-                    <p>AI赋能了传统意义上的非技术边缘群体。未来将演变为通过极低门槛的自然语言交互，赋能具备深厚业务Domain Knowledge的非研发人员（即60分开发者）。<span class="cite">[cite: 115, 118]</span> 智能体工作流正在成为企业的核心引擎。<span class="cite">[cite: 120]</span></p>
-                </div>
-                <div class="card">
-                    <h3>四、技能重构的阵痛 <span class="cite">[cite: 121]</span></h3>
-                    <p>传统软件工程师的职业护城河正面临解构。初级代码打字员的生存空间被极度压缩。<span class="cite">[cite: 122, 123]</span> 未来的超级个体必须具备极致的解构与架构模块化能力、从工具使用者向AI代理编排者的跃迁能力，以及坚不可摧的计算机科学底层信仰。<span class="cite">[cite: 124]</span></p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">青年工程师的破局法则 <span class="cite">[cite: 136]</span></h2>
-            <p>本次调研化身为一把锋利的手术刀，果断切开了传统教育体系下的信息茧房。<span class="cite">[cite: 135]</span> 时代抛弃一个传统的代码工人，往往连一句再见都不会说。但对于那些具备敏锐技术嗅觉与坚韧底层信仰的青年学子而言，2026年绝不是悲观的终点，而是超级个体崛起的破晓。<span class="cite">[cite: 137]</span></p>
-            <p>借助新媒体平台的传播，公众切实感受到了东大青年学子“为中国式现代化挺膺担当”的务实作风与时代风貌。<span class="cite">[cite: 144]</span></p>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>东南大学计软智学院 码动未来团队 版权所有 © 2026 <span class="cite">[cite: 11, 13]</span></p>
-        <p>CO DE THE FUTURE · DREAM IN CLOUD <span class="cite">[cite: 181]</span></p>
-    </footer>
+    <title>码动未来，云端问道 - 东南大学AI编程行业调研报告</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const sections = document.querySelectorAll('.section');
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gold-primary': '#d4af37',   /* 核心亮金色 */
+                        'gold-light': '#fef08a',     /* 浅香槟金 */
+                        'gold-dark': '#a16207',      /* 暗金色 */
+                        'dark-bg': '#0a0a0c',        /* 深邃黑背景 */
+                        'card-bg': '#16161a',        /* 卡片深灰背景 */
+                        'text-main': '#e2e8f0',      /* 主文本亮灰 */
+                        'text-muted': '#94a3b8',     /* 辅助文本暗灰 */
+                    },
+                    fontFamily: {
+                        sans: ['"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
-                });
-            }, observerOptions);
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Reset & Basic Setup */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background-color: #0a0a0c; color: #e2e8f0; line-height: 1.8; }
+        
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            padding: 1rem;
+            background: #16161a;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+
+        /* Interactive Elements Styling */
+        .tab-btn { color: #94a3b8; transition: all 0.3s; border-bottom: 2px solid transparent; }
+        .tab-btn:hover { color: #fef08a; }
+        .tab-btn.active { border-bottom: 2px solid #d4af37; color: #d4af37; font-weight: 600; }
+        
+        .nav-link { color: #94a3b8; border-right: 4px solid transparent; }
+        .nav-link:hover { background-color: rgba(212, 175, 55, 0.05); color: #fef08a; }
+        .nav-link.active { background-color: rgba(212, 175, 55, 0.1); color: #d4af37; font-weight: bold; border-right: 4px solid #d4af37; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0c; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+
+        /* Typography Enhancements */
+        .report-text { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; }
+        .quote-block { border-left: 4px solid #d4af37; background: rgba(212, 175, 55, 0.05); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; font-family: 'Noto Serif SC', serif;}
+        
+        /* AI Feature Styling */
+        .ai-gradient-border {
+            position: relative;
+            background: #16161a;
+            background-clip: padding-box;
+            border: 1px solid transparent;
+            border-radius: 0.75rem;
+        }
+        .ai-gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -1px; right: -1px; bottom: -1px; left: -1px;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(to bottom right, #d4af37, #a16207, #0a0a0c);
+        }
+        
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <header class="md:hidden bg-card-bg border-b border-gray-800 text-gold-primary p-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
+        <h1 class="text-lg font-bold tracking-widest">码动未来</h1>
+        <button id="mobile-menu-btn" class="text-gold-primary text-2xl px-2">&#9776;</button>
+    </header>
+
+    <nav id="sidebar" class="hidden md:flex flex-col w-64 bg-card-bg border-r border-gray-800 fixed h-full z-40 transition-transform duration-300 overflow-y-auto shadow-2xl">
+        <div class="p-8 border-b border-gray-800 text-center">
+            <h2 class="text-2xl font-serif text-gold-primary font-bold tracking-widest mb-2">云端问道</h2>
+            <p class="text-xs text-gold-dark tracking-widest uppercase">2026 调研报告</p>
+        </div>
+        <div class="flex-1 py-6">
+            <a href="#section-intro" class="nav-link block px-8 py-4 transition">01. 时代巨浪与概览</a>
+            <a href="#section-paradox" class="nav-link block px-8 py-4 transition">02. 生产力幻觉悖论</a>
+            <a href="#section-security" class="nav-link block px-8 py-4 transition">03. 影子AI与数据主权</a>
+            <a href="#section-expert" class="nav-link block px-8 py-4 transition">04. 大厂专家深度洞察</a>
+            <a href="#section-skills" class="nav-link block px-8 py-4 transition">05. 超级个体技能重构</a>
+            <a href="#section-education" class="nav-link block px-8 py-4 transition">06. 产教融合与实践</a>
+        </div>
+        <div class="p-6 border-t border-gray-800 bg-black/50 text-center">
+            <p class="text-xs text-gold-dark mb-2 tracking-widest">东南大学计软智学院 [cite: 179]</p>
+            <p class="text-[10px] text-gray-500 leading-relaxed">吴心成 / 魏亦杨 / 杨畅<br>祝荣焜 / 吕心玥 / 周依一</p>
+        </div>
+    </nav>
+
+    <main class="flex-1 md:ml-64 p-4 md:p-8 lg:p-12 w-full max-w-6xl mx-auto">
+        
+        <section id="section-intro" class="mb-16 pt-4">
+            <div class="bg-card-bg rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-800 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gold-primary/5 rounded-bl-full -z-10 blur-3xl"></div>
+                <div class="inline-block px-4 py-1 border border-gold-dark/50 text-gold-light text-xs tracking-widest uppercase rounded-full mb-6">
+                    实证调研报告 / 软件工程范式重塑
+                </div>
+                <h1 class="text-4xl md:text-5xl font-serif text-white mb-6 leading-tight">
+                    码动未来，云端问道<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-primary to-gold-light text-2xl md:text-3xl mt-4 block">2026年AI编程行业现状与开发者生存图鉴</span>
+                </h1>
+                <p class="report-text text-lg mb-8 max-w-3xl">
+                    生成式人工智能已不再是实验室里的星火，而是重塑全球软件工程范式的燎原之势 [cite: 23]。当今世界正处于数字化与智能化高速发展的历史性交汇期，2026年被业界广泛定义为AI Agent从概念验证迈向产业重构的规模化元年 [cite: 26]。本报告旨在穿透商业营销的迷雾，探寻在算法洪流中寻找涌动的成长 [cite: 23]。
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-gray-800 pt-8 mt-4">
+                    <div>
+                        <p class="text-xs text-gold-dark uppercase tracking-wider mb-1">调研坐标</p>
+                        <p class="font-semibold text-gray-200">杭州·阿里西溪园区</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gold-dark uppercase tracking-wider mb-1">核心智库</p>
+                        <p class="font-semibold text-gray-200">Gartner, Zscaler等</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gold-dark uppercase tracking-wider mb-1">渗透规模</p>
+                        <p class="font-semibold text-gray-200">2000万开发者大关 [cite: 55]</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gold-dark uppercase tracking-wider mb-1">AI代码占比</p>
+                        <p class="font-semibold text-gold-primary">全球均值 46% [cite: 55]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-paradox" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-2xl font-serif text-white mb-8 flex items-center">
+                <span class="w-1 h-8 bg-gold-primary mr-4 inline-block"></span>
+                生产力幻觉与工程断崖 (Vibe Coding 的破灭)
+            </h2>
+            <p class="report-text mb-6">
+                2025年，“Vibe Coding”作为一个极具煽动性的概念席卷全球，主张凭借直觉描述即可生成应用 [cite: 94]。然而，在真实商业环境的高频访问与网络波动中，这一概念陷入了交付困境。支撑现象级繁荣的，大多是短视频营销吸引来的非专业观光客 [cite: 95]。
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="bg-card-bg p-8 rounded-xl border border-gray-800 relative overflow-hidden group hover:border-gold-primary/50 transition-colors">
+                    <h3 class="text-xl font-bold mb-4 text-gold-light">主观狂热：20% 的提效幻觉</h3>
+                    <p class="report-text text-sm">
+                        AI在生成基础脚手架和样板文件时速度极快，给予了开发者强烈的心流错觉。大量开发者主观上坚信自己变快了20% [cite: 96]。由于极低的生成门槛，代码量呈现出指数级增长。
+                    </p>
+                </div>
+                <div class="bg-card-bg p-8 rounded-xl border border-gray-800 relative overflow-hidden group hover:border-gold-primary/50 transition-colors">
+                    <h3 class="text-xl font-bold mb-4 text-gold-light">客观灾难：下降 19% 的真实效能</h3>
+                    <p class="report-text text-sm">
+                        METR研究机构的随机对照试验得出了令产业界胆寒的结论：在处理复杂工程任务时，使用AI的高级开发者实际完成时间**比纯人工组慢了19%** [cite: 89, 96]。大量隐秘的逻辑漏洞导致审查与排错成本激增，代码库重复率飙升了4倍 [cite: 97, 99]。
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-center font-bold text-gray-300 mb-2 tracking-widest">主观感知 VS 客观交付效能对比</h3>
+                <p class="text-center text-xs text-gray-500 mb-6">数据来源：METR随机对照试验实证数据提取</p>
+                <div class="chart-container">
+                    <canvas id="paradoxChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-security" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-2xl font-serif text-white mb-8 flex items-center">
+                <span class="w-1 h-8 bg-gold-dark mr-4 inline-block"></span>
+                史诗级失血：影子AI与数据主权保卫战
+            </h2>
+            
+            <div class="quote-block mb-8">
+                “代码是凝聚了海量算力测试、未公开业务逻辑、核心商业算法以及底层安全架构的无价数字资产 [cite: 106]。”
+            </div>
+
+            <p class="report-text mb-6">
+                实地调研发现，最令大厂震撼的并非AI的强大，而是面对外部极致高效工具时表现出的极度警惕 [cite: 105]。当员工将代码粘贴进第三方云端时，传统物理防线瞬间崩塌。
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-black p-6 rounded-lg border border-red-900/30 text-center">
+                    <div class="text-3xl font-bold text-red-500 mb-2">18,033 TB</div>
+                    <div class="text-sm text-gray-400">私有数据外流总量 [cite: 106]</div>
+                </div>
+                <div class="bg-black p-6 rounded-lg border border-red-900/30 text-center">
+                    <div class="text-3xl font-bold text-red-500 mb-2">77%</div>
+                    <div class="text-sm text-gray-400">员工绕过DLP系统违规复制 [cite: 106, 112]</div>
+                </div>
+                <div class="bg-black p-6 rounded-lg border border-red-900/30 text-center">
+                    <div class="text-3xl font-bold text-red-500 mb-2">16 分钟</div>
+                    <div class="text-sm text-gray-400">受测AI防线平均被攻破时间 [cite: 107, 112]</div>
+                </div>
+            </div>
+            <p class="report-text text-sm italic text-gray-500 text-center mb-8">面对严峻的合规压力，巨头们绝不容许核心业务的咽喉被扼住，建立基于本地部署的**“主权工厂AI”**成为战略突围的必然选择 [cite: 108]。</p>
+        </section>
+
+        <section id="section-expert" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-2xl font-serif text-white mb-8 flex items-center">
+                <span class="w-1 h-8 bg-gold-primary mr-4 inline-block"></span>
+                深水区对话：阿里“十年陈”专家洞察
+            </h2>
+
+            <div class="bg-card-bg rounded-xl shadow-2xl border border-gray-800 overflow-hidden">
+                <div class="flex border-b border-gray-800 bg-black/50 overflow-x-auto">
+                    <button class="tab-btn active px-8 py-5 text-sm tracking-wider whitespace-nowrap focus:outline-none" onclick="openTab(event, 'tab-roles')">60分开发者的狂欢</button>
+                    <button class="tab-btn px-8 py-5 text-sm tracking-wider whitespace-nowrap focus:outline-none" onclick="openTab(event, 'tab-cs')">底层信仰与基本功</button>
+                    <button class="tab-btn px-8 py-5 text-sm tracking-wider whitespace-nowrap focus:outline-none" onclick="openTab(event, 'tab-curse')">初级码农的智能诅咒</button>
+                </div>
+
+                <div id="tab-roles" class="tab-content p-8 md:p-10 block">
+                    <h3 class="text-xl font-bold mb-6 text-gold-light">业务专家的降维打击</h3>
+                    <p class="report-text text-sm mb-4">
+                        AI并未停止重塑生产力，而是精准赋能了传统意义上的非技术边缘群体 [cite: 115]。
+                    </p>
+                    <div class="quote-block text-gray-300 text-sm leading-relaxed">
+                        “在企业内部，AI编程最大受益者往往不是核心研发，而是测试、运维甚至懂点逻辑的产品经理。这些被定义为**‘60分开发者’**的群体，借助智能体工作流，能够独立跑通闭环，对传统外包岗位形成了降维打击 [cite: 118, 120]。”
+                    </div>
+                </div>
+
+                <div id="tab-cs" class="tab-content p-8 md:p-10 hidden">
+                    <h3 class="text-xl font-bold mb-6 text-gold-light">坚不可摧的底层信仰</h3>
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="flex-1">
+                            <p class="report-text text-sm mb-4">
+                                极致反常识的结论：AI时代，扎实的计算机底层（数据结构、编译原理）不仅没被淘汰，反而是救命稻草 [cite: 124]。
+                            </p>
+                            <p class="report-text text-sm">
+                                当AI写出存在极深逻辑漏洞或内存泄漏的代码时，缺乏基本功的开发者将完全无从下手。大模型剥离了繁琐实现，却极其强烈地放大了系统级解耦与审查的价值 [cite: 124]。
+                            </p>
+                        </div>
+                        <div class="flex-1 w-full bg-black/30 p-4 rounded-lg border border-gray-800">
+                            <h4 class="text-center text-xs text-gold-dark mb-2 tracking-widest">AI介入后的代码状态重构</h4>
+                            <div class="chart-container" style="height: 220px; max-height: 220px; border:none; background:transparent; box-shadow:none; padding:0;">
+                                <canvas id="adoptionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-curse" class="tab-content p-8 md:p-10 hidden">
+                    <h3 class="text-xl font-bold mb-6 text-gold-light">谁将被时代抛弃？</h3>
+                    <div class="bg-red-900/20 border border-red-900/50 p-6 rounded-lg mb-6">
+                        <p class="text-gray-300 italic font-serif text-lg">
+                            “如果一个初级开发者的核心价值仅仅停留在把需求翻译成能跑的代码，或是单纯扮演给AI代码点击Approve的流水线质检员，那么他本质上已成为拖慢AI自动化管线运转的累赘 [cite: 123]。”
+                        </p>
+                    </div>
+                    <p class="report-text text-sm">
+                        传统软件工程师的职业护城河正面临摧枯拉朽般的解构 [cite: 122]。未来的开发者必须跃迁为统帅各类AI代理协同作战的“战略指挥官” [cite: 120]。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-skills" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-2xl font-serif text-white mb-8 flex items-center">
+                <span class="w-1 h-8 bg-gold-primary mr-4 inline-block"></span>
+                跨越智能诅咒：超级个体技能图谱
+            </h2>
+            <p class="report-text mb-8">
+                时代抛弃一个传统的代码工人，连一句再见都不会说。但对于具备敏锐嗅觉的青年学子而言，2026年是超级个体崛起的破晓 [cite: 137]。
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center bg-card-bg p-8 rounded-xl border border-gray-800 mb-12">
+                <div>
+                    <h3 class="text-lg tracking-widest text-gold-light mb-6 uppercase">三大核心突围维度</h3>
+                    <ul class="space-y-6">
+                        <li class="flex border-b border-gray-800 pb-4">
+                            <span class="text-gold-primary font-bold mr-4 text-2xl font-serif">I</span>
+                            <div>
+                                <strong class="text-gray-200 block tracking-wide">架构拆解与解构能力</strong>
+                                <span class="text-sm text-gray-500">将错综复杂的宏大系统，精准拆解为互不干扰、逻辑闭环且AI能稳定消化的小任务 [cite: 124]。</span>
+                            </div>
+                        </li>
+                        <li class="flex border-b border-gray-800 pb-4">
+                            <span class="text-gold-primary font-bold mr-4 text-2xl font-serif">II</span>
+                            <div>
+                                <strong class="text-gray-200 block tracking-wide">AI 代理管线编排</strong>
+                                <span class="text-sm text-gray-500">掌握 Spring AI 等底层框架，精确调度多个具备不同专业属性的AI代理协同完成长链路迭代 [cite: 124]。</span>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <span class="text-gold-primary font-bold mr-4 text-2xl font-serif">III</span>
+                            <div>
+                                <strong class="text-gray-200 block tracking-wide">去中心化沟通体系</strong>
+                                <span class="text-sm text-gray-500">极高的自然语言表达精度，跨国界/开源架构的理解与统筹 [cite: 124]。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="w-full">
+                    <h3 class="text-center font-bold text-gray-400 mb-2 text-sm tracking-widest">能力雷达：打字员 vs 数字指挥官</h3>
+                    <div class="chart-container" style="background: transparent; box-shadow: none; border: none; height: 300px;">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-gradient-border p-1 bg-gradient-to-br from-gold-primary via-gray-900 to-dark-bg rounded-xl">
+                <div class="bg-card-bg rounded-lg p-6 md:p-10 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-5">
+                        <span class="text-9xl text-gold-primary">✦</span>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-3 flex items-center text-white">
+                        <span class="text-gold-primary mr-3">✦</span> 个人技能重构演算引擎 (Powered by Gemini)
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-8 max-w-2xl">
+                        输入你当前的技能栈或技术偏好，本引擎将基于《码动未来》调研的“2026大厂用人逻辑”，为您生成定制化的破局与转型路径。
+                    </p>
+
+                    <div class="space-y-5 relative z-10">
+                        <div>
+                            <textarea id="user-skills" rows="3" class="w-full rounded-lg bg-black border-gray-700 border p-4 text-gray-200 focus:ring-1 focus:ring-gold-primary focus:border-gold-primary outline-none transition resize-none" placeholder="描述你当前的技术栈与日常工作（如：熟练使用 Java CRUD，目前主要负责维护老旧后台系统接口...）"></textarea>
+                        </div>
+                        <button id="btn-evaluate" class="bg-gold-primary text-black font-bold py-3 px-8 rounded hover:bg-gold-light transition-all flex items-center justify-center w-full md:w-auto uppercase tracking-widest text-sm">
+                            <span id="btn-text">启动架构推演</span>
+                            <div id="btn-loader" class="loader hidden ml-3 border-black border-t-white"></div>
+                        </button>
+                    </div>
+
+                    <div id="ai-response-container" class="mt-8 hidden">
+                        <div class="bg-black/50 border border-gold-dark/30 rounded-lg p-8 relative">
+                            <div class="absolute -top-3 left-8 bg-card-bg px-2 text-gold-primary text-xs tracking-widest border border-gold-dark/30 rounded">演算结果输出</div>
+                            <div id="ai-response-content" class="text-gray-300 text-sm leading-relaxed space-y-4">
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <div id="ai-error-container" class="mt-6 hidden p-4 bg-red-900/20 text-red-400 rounded border border-red-900/50 text-sm">
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <section id="section-education" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-2xl font-serif text-white mb-8 flex items-center">
+                <span class="w-1 h-8 bg-gray-500 mr-4 inline-block"></span>
+                破除茧房：青春为中国式现代化挺膺担当
+            </h2>
+            
+            <div class="bg-black p-8 rounded-xl border border-gray-800 mb-12">
+                <p class="text-gray-300 leading-relaxed text-sm mb-6">
+                    本次调研化身为一把锋利的手术刀，果断切开了传统教育体系下的信息茧房 [cite: 135]。通过将大厂真实商业战场上“零容忍数据泄密”、“摒弃玩具级Vibe Coding”等残酷法则引入校园视野，本报告为青年学子提前绘制了实操价值极高的职场生存地图 [cite: 135]。
+                </p>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    东南大学计软智学院始终坚持产学研深度融合，鼓励学生走出象牙塔。团队展现的严密逻辑推演与敏锐洞察，正是学校践行“止于至善”与“人工智能+”教育改革的具体体现 [cite: 144]。
+                </p>
+            </div>
+
+            <h3 class="text-lg tracking-widest text-gold-light mb-8 uppercase">实地问道轨迹 (2026)</h3>
+            <div class="relative border-l border-gray-700 ml-4 md:ml-6 space-y-10 pb-4">
+                
+                <div class="relative pl-10">
+                    <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gold-dark shadow-[0_0_10px_rgba(212,175,55,0.8)]"></div>
+                    <div class="text-xs text-gold-dark tracking-widest font-mono">2026.01.23 - 01.30</div>
+                    <h4 class="text-md font-bold text-gray-200 mt-2">案头重构与数据交叉验证 [cite: 69]</h4>
+                    <p class="text-sm text-gray-500 mt-2 leading-relaxed">全景式扫描GitHub、Gartner、Zscaler等数十份全球权威智库报告，构建严密量化模型，锚定真实痛点。</p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gold-primary shadow-[0_0_15px_rgba(212,175,55,1)] ring-4 ring-black"></div>
+                    <div class="text-xs text-gold-primary tracking-widest font-mono">2026.02.01</div>
+                    <h4 class="text-md font-bold text-gray-200 mt-2">深水区刺探：阿里西溪访谈 [cite: 69]</h4>
+                    <p class="text-sm text-gray-500 mt-2 leading-relaxed">直插中国云计算研发重镇，与一线“十年陈”专家进行长达数小时的思想博弈，获取了极具穿透力的定性结论。</p>
+                </div>
+
+                <div class="relative pl-10">
+                    <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gray-600"></div>
+                    <div class="text-xs text-gray-500 tracking-widest font-mono">2026.02.02 - 03.01</div>
+                    <h4 class="text-md font-bold text-gray-200 mt-2">智库成果交付与融媒宣发 [cite: 69, 143]</h4>
+                    <p class="text-sm text-gray-500 mt-2 leading-relaxed">将微观叙事与宏观数据无缝拼接，撰写万字报告。搭建“一站两端”融媒体矩阵，辐射社会认知。</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center border-t border-gray-800 pt-10">
+                <div class="inline-block border border-gold-dark/30 px-6 py-2 rounded mb-4">
+                    <p class="text-sm text-gold-primary tracking-[0.2em] uppercase font-serif">Code the Future · Dream in Cloud [cite: 181]</p>
+                </div>
+                <p class="text-xs text-gray-600 tracking-widest">© 2026 东南大学“码动未来”社会实践团 [cite: 25]</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // 1. ScrollSpy functionality for sidebar navigation
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const scrollY = window.pageYOffset;
 
             sections.forEach(section => {
-                observer.observe(section);
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 200; 
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
             });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current) && current !== "") {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            if(!sidebar.classList.contains('hidden')) {
+                sidebar.classList.add('absolute', 'top-[60px]', 'left-0', 'w-full');
+                sidebar.classList.remove('md:flex');
+            } else {
+                sidebar.classList.remove('absolute', 'top-[60px]', 'left-0', 'w-full');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth < 768) {
+                    sidebar.classList.add('hidden');
+                }
+            });
+        });
+
+        // 2. Tab functionality for Expert Interview section
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("block");
+                tabcontent[i].classList.add("hidden");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            const selectedTab = document.getElementById(tabName);
+            selectedTab.style.display = "block";
+            selectedTab.classList.remove("hidden");
+            selectedTab.classList.add("block");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // 3. Chart.js Implementations (Black & Gold Theme)
+        Chart.defaults.font.family = '"PingFang SC", "Microsoft YaHei", sans-serif';
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+
+        // Chart 1: Paradox Chart (Bar)
+        const ctxParadox = document.getElementById('paradoxChart').getContext('2d');
+        new Chart(ctxParadox, {
+            type: 'bar',
+            data: {
+                labels: ['主观感知时间变化', '客观实证时间变化'],
+                datasets: [
+                    {
+                        label: '耗时增减百分比',
+                        data: [-20, +19], // 主观感知节省20%，客观增加19%
+                        backgroundColor: (context) => {
+                            const val = context.raw || 0;
+                            return val < 0 ? 'rgba(212, 175, 55, 0.8)' : 'rgba(153, 27, 27, 0.8)';
+                        },
+                        borderRadius: 4,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { 
+                    y: { 
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { callback: function(value){ return value + '%' } }
+                    }, 
+                    x: { grid: { display: false } } 
+                }
+            }
+        });
+
+        // Chart 2: Code Adoption
+        const ctxAdoption = document.getElementById('adoptionChart').getContext('2d');
+        new Chart(ctxAdoption, {
+            type: 'doughnut',
+            data: {
+                labels: ['直接采纳 (30%)', '抛弃或重构审查 (70%)'],
+                datasets: [{ 
+                    data: [30, 70], 
+                    backgroundColor: ['#d4af37', '#1f2937'], 
+                    borderColor: '#0a0a0c',
+                    borderWidth: 2,
+                    hoverOffset: 4 
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, cutout: '75%',
+                plugins: { legend: { position: 'right', labels: { boxWidth: 10, font:{size:11} } } }
+            }
+        });
+
+        // Chart 3: Skills Radar Chart
+        const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['手写实现(Typing)', '架构模块设计', '复杂系统解耦', 'AI代理编排', '底层算法审查'],
+                datasets: [
+                    {
+                        label: '传统“代码工人”',
+                        data: [90, 30, 40, 10, 30],
+                        fill: true, backgroundColor: 'rgba(148, 163, 184, 0.1)', borderColor: '#64748b',
+                        pointBackgroundColor: '#64748b', borderWidth: 1
+                    },
+                    {
+                        label: '2026 数字指挥官',
+                        data: [30, 95, 90, 95, 85],
+                        fill: true, backgroundColor: 'rgba(212, 175, 55, 0.2)', borderColor: '#d4af37',
+                        pointBackgroundColor: '#d4af37', borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' },
+                        pointLabels: { font: { size: 11 }, color: '#cbd5e1' },
+                        ticks: { display: false, min: 0, max: 100, backdropColor: 'transparent' }
+                    }
+                },
+                plugins: { legend: { position: 'bottom', labels: { color: '#e2e8f0'} } }
+            }
+        });
+
+        // 4. Gemini API Integration Placeholder
+        const apiKey = "AIzaSyCK45cMzlVWY9NiY1rWVQzUjD11mEklV_Y"; // API key env variable
+        const btnEvaluate = document.getElementById('btn-evaluate');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+        const userInput = document.getElementById('user-skills');
+        const responseContainer = document.getElementById('ai-response-container');
+        const responseContent = document.getElementById('ai-response-content');
+        const errorContainer = document.getElementById('ai-error-container');
+
+        async function fetchWithRetry(url, options, maxRetries = 3) {
+            let retries = 0;
+            const baseDelay = 1000;
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    retries++;
+                    if (retries >= maxRetries) throw error;
+                    await new Promise(resolve => setTimeout(resolve, baseDelay * Math.pow(2, retries - 1)));
+                }
+            }
+        }
+
+        btnEvaluate.addEventListener('click', async () => {
+            const skills = userInput.value.trim();
+            if (!skills) {
+                alert("请先输入您的技能描述数据进行演算。");
+                return;
+            }
+
+            btnEvaluate.disabled = true;
+            btnText.textContent = "正在连接云端引擎...";
+            btnLoader.classList.remove('hidden');
+            responseContainer.classList.add('hidden');
+            errorContainer.classList.add('hidden');
+
+            const systemPrompt = `你现在是《码动未来》报告中接受访谈的阿里技术专家。你的风格务实、犀利，充满“黑金大气”的精英感。
+根据用户的技能描述，基于以下报告结论给出建议：
+1. 纯手工Typing面临诅咒，需升级为AI架构师。
+2. 拥抱企业级代理框架，构建流水线。
+3. 巩固底层信仰（基本功）以应对AI留下的复杂Debt。
+直接输出HTML。使用：
+<h4 class="text-gold-primary font-bold text-lg mb-2">等标签控制样式，<ul class="list-disc pl-5 mb-4 space-y-2 text-gray-300">。不带任何 markdown 块标记。`;
+
+            const payload = {
+                contents: [{ parts: [{ text: `技能数据：${skills}` }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            try {
+                const result = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (generatedText) {
+                    const cleanHtml = generatedText.replace(/```html/g, '').replace(/```/g, '').trim();
+                    responseContent.innerHTML = cleanHtml;
+                    responseContainer.classList.remove('hidden');
+                } else { throw new Error("无输出"); }
+            } catch (error) {
+                console.error(error);
+                errorContainer.textContent = "系统接口繁忙，无法连接云端引擎进行演算，请稍后重试。";
+                errorContainer.classList.remove('hidden');
+            } finally {
+                btnEvaluate.disabled = false;
+                btnText.textContent = "启动架构推演";
+                btnLoader.classList.add('hidden');
+            }
         });
     </script>
 </body>
