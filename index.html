@@ -3,709 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>码动未来，云端问道 - 东南大学AI编程行业调研报告</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'seu-blue': '#005bac',
-                        'ali-orange': '#ff6a00',
-                        'dark-bg': '#0f172a',
-                        'light-bg': '#f8fafc',
-                    },
-                    fontFamily: {
-                        sans: ['"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
-                        serif: ['"Noto Serif SC"', 'serif'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>码动未来，云端问道 | 2026年AI编程行业调研报告 </title>
     <style>
-        /* CSS Reset & Basic Setup */
-        html { scroll-behavior: smooth; }
-        body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background-color: #f8fafc; color: #334155; line-height: 1.6; }
-        
-        /* Chart Container Styling */
-        .chart-container {
-            position: relative;
+        /* 黑金配色 CSS 变量定义 */
+        :root {
+            --bg-color: #0a0a0c;
+            --bg-light: #16161a;
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa8122;
+            --text-main: #e0e0e0;
+            --text-muted: #999999;
+            --border-gold: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif; /* 采用衬线体提升优雅感 */
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--gold-primary);
+            font-weight: normal;
+        }
+
+        /* 顶部导航栏 */
+        header {
+            position: fixed;
+            top: 0;
             width: 100%;
+            background: rgba(10, 10, 12, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: var(--border-gold);
+            z-index: 1000;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+        }
+
+        /* 首屏头图区 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a20 0%, #0a0a0c 100%);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .hero p.subtitle {
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 40px;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-            padding: 1rem;
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        @media (min-width: 768px) {
-            .chart-container { height: 400px; }
         }
 
-        /* Interactive Elements Styling */
-        .tab-btn.active { border-bottom: 2px solid #005bac; color: #005bac; font-weight: 600; }
-        .nav-link.active { background-color: #e0f2fe; color: #005bac; font-weight: bold; border-right: 4px solid #005bac; }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .hero .team {
+            font-family: sans-serif;
+            color: var(--text-muted);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
 
-        /* Typography Enhancements */
-        .report-text { font-size: 1.05rem; line-height: 1.8; color: #475569; }
-        .quote-block { border-left: 4px solid #ff6a00; background: #fff7ed; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; font-style: italic;}
-        
-        /* AI Feature Styling */
-        .ai-gradient-border {
+        /* 内容容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* 卷首语 */
+        .preface {
+            border-left: 4px solid var(--gold-primary);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+        }
+
+        /* 章节通用样式 */
+        .section {
+            margin-bottom: 80px;
+            opacity: 0; /* 用于滚动动画 */
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
             position: relative;
-            background: white;
-            background-clip: padding-box;
-            border: 2px solid transparent;
-            border-radius: 0.75rem;
         }
-        .ai-gradient-border::before {
+
+        .section-title::after {
             content: '';
-            position: absolute;
-            top: -2px; right: -2px; bottom: -2px; left: -2px;
-            z-index: -1;
-            margin: -2px;
-            border-radius: inherit;
-            background: linear-gradient(to right, #005bac, #ff6a00, #a855f7);
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--gold-primary);
+            margin: 15px auto 0;
         }
-        
-        /* Loader */
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #ff6a00;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
+
+        /* 卡片式布局（用于展示理论成果） */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .card {
+            background: var(--bg-light);
+            border: var(--border-gold);
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border-color: var(--gold-primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        /* 引用文献标记 */
+        .cite {
+            font-size: 0.8em;
+            color: var(--gold-dark);
+            vertical-align: super;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: var(--border-gold);
+            background: var(--bg-light);
+            color: var(--text-muted);
+            font-family: sans-serif;
+            font-size: 0.9rem;
+        }
     </style>
-
-    <!-- Required Placeholders -->
-    <!-- Chosen Palette: Warm Neutrals (Slate-50) background, Deep SEU Blue (#005bac), Alibaba Orange (#ff6a00). -->
-    <!-- Application Structure Plan: Sidebar nav + main content area. Added an interactive AI module in the skills section to increase engagement. -->
-    <!-- Visualization & Content Choices: Line chart, Doughnut chart, Radar chart. ADDED: Gemini API integration for personalized AI career advice. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="flex flex-col md:flex-row min-h-screen">
+<body>
 
-    <!-- Mobile Header -->
-    <header class="md:hidden bg-seu-blue text-white p-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
-        <h1 class="text-lg font-bold">码动未来，云端问道</h1>
-        <button id="mobile-menu-btn" class="text-white text-2xl px-2">&#9776;</button>
+    <header>
+        <h2>码动未来 · 云端筑梦 [cite: 183]</h2>
     </header>
 
-    <!-- Sidebar Navigation -->
-    <nav id="sidebar" class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 fixed h-full z-40 transition-transform duration-300 overflow-y-auto shadow-lg">
-        <div class="p-6 bg-seu-blue text-white">
-            <h2 class="text-2xl font-bold tracking-wider mb-2">调研报告</h2>
-            <p class="text-xs text-blue-200">2026东南大学寒假社会实践</p>
-        </div>
-        <div class="flex-1 py-4">
-            <a href="#section-intro" class="nav-link block px-6 py-3 text-slate-600 hover:bg-slate-50 transition">01. 项目概览</a>
-            <a href="#section-background" class="nav-link block px-6 py-3 text-slate-600 hover:bg-slate-50 transition">02. 行业寒冬与高墙</a>
-            <a href="#section-expert" class="nav-link block px-6 py-3 text-slate-600 hover:bg-slate-50 transition">03. 阿里专家深度访谈</a>
-            <a href="#section-skills" class="nav-link block px-6 py-3 text-slate-600 hover:bg-slate-50 transition">04. 开发者技能重构</a>
-            <a href="#section-education" class="nav-link block px-6 py-3 text-slate-600 hover:bg-slate-50 transition">05. 产教错配与总结</a>
-        </div>
-        <div class="p-4 border-t border-slate-200 bg-slate-50">
-            <p class="text-xs text-slate-500 font-semibold mb-1">指导老师：张航</p>
-            <p class="text-xs text-slate-400 leading-relaxed">团队成员：吴心成, 吕心玥, 魏亦杨, 杨畅, 祝荣焜, 周依一</p>
-        </div>
-    </nav>
+    <section class="hero">
+        <h1>码动未来，云端问道 </h1>
+        <p class="subtitle">2026年AI编程行业现状、开发者生存与技能重构调研报告 </p>
+        <p class="team">东南大学计软智学院 · 码动未来团队 [cite: 11] | 2026年寒假社会实践 [cite: 13]</p>
+    </section>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 md:ml-64 p-4 md:p-8 lg:p-12 w-full max-w-6xl mx-auto">
+    <div class="container">
+        <div class="section preface visible">
+            <p>“人工智能是引领这一轮科技革命和产业变革的战略性技术，具有溢出带动性很强的‘头雁’效应。” <span class="cite">[cite: 22]</span></p>
+            <p>站在2026年的时代潮头，生成式人工智能已不再是实验室里的星火，而是重塑全球软件工程范式的燎原之势。东南大学码动未来实践团深入产业一线，不仅是为了记录这一场技术变革的脉搏，更是为了探寻在算法洪流中寻找涌动的成长。<span class="cite">[cite: 23]</span></p>
+            <p>我们以青春之名，云端问道，只为码动未来。<span class="cite">[cite: 24]</span></p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">核心摘要与时代背景</h2>
+            <p>当今世界正处于数字化与智能化高速发展的历史性交汇期，以大语言模型为核心的生成式人工智能正在深刻重塑全球软件工程的底层逻辑。<span class="cite"></span> 步入2026年，人工智能的发展正式跨越了以对话式交互为主的初级阶段，全面迈入以AI Agent为核心的自主行动时代。<span class="cite">[cite: 55]</span></p>
+            <p>截至2025年中期，GitHub Copilot的累计用户已突破2000万大关，在《财富》100强企业中的渗透率高达90%，并且生成了全球开发者平均46%的代码。<span class="cite">[cite: 55]</span> 然而，在技术普及率呈现指数级攀升的表象下，生产力幻觉与工程质量的断崖式下跌首当其冲。<span class="cite">[cite: 61]</span></p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">深入一线：云端问道</h2>
+            <p>本次实践项目摒弃了传统走马观花式的浅层走访，采用了一套极其严密、逻辑自洽的“问题锚定——案头数据交叉——深度实地访谈——洞察提炼与重构”的实施路径。<span class="cite">[cite: 68]</span></p>
+            <p>2026年2月1日，实践团前往位于杭州市余杭区的阿里巴巴西溪园区，展开了本次调研的核心实地考察环节。<span class="cite">[cite: 79]</span> 在园区内，实践团与某核心事业部拥有二十年资深开发经验的“十年陈”技术专家进行了面对面对话，探讨了外部AI工具与内部数据主权之间的张力，以及Vibe Coding在复杂系统交付中的实际情况。<span class="cite">[cite: 81, 82, 84]</span></p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">四大核心理论洞察</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>一、生产力悖论 <span class="cite">[cite: 92]</span></h3>
+                    <p>支撑“Vibe Coding”现象级繁荣的，大多数是被短视频营销吸引而来的非专业观光客。<span class="cite">[cite: 95]</span> METR研究机构对照试验显示，在处理复杂工程任务时，使用AI代码助手的开发者实际完成时间比纯人工组慢了19%，揭示了AI编程领域隐秘的生产力悖论。<span class="cite">[cite: 96, 97]</span></p>
+                </div>
+                <div class="card">
+                    <h3>二、数据主权保卫战 <span class="cite">[cite: 101]</span></h3>
+                    <p>代码是凝聚了海量算力测试、未公开业务逻辑的无价数字资产。<span class="cite">[cite: 106]</span> 2025年至2026年间，流向各类AI应用程序的企业私有数据猛增了93%。<span class="cite">[cite: 106]</span> 面对Agentic架构诱发的极速攻击面崩塌，建立基于本地化部署的主权工厂AI成为企业战略突围的必然。<span class="cite">[cite: 107, 108]</span></p>
+                </div>
+                <div class="card">
+                    <h3>三、60分开发者的狂欢 <span class="cite">[cite: 114]</span></h3>
+                    <p>AI赋能了传统意义上的非技术边缘群体。未来将演变为通过极低门槛的自然语言交互，赋能具备深厚业务Domain Knowledge的非研发人员（即60分开发者）。<span class="cite">[cite: 115, 118]</span> 智能体工作流正在成为企业的核心引擎。<span class="cite">[cite: 120]</span></p>
+                </div>
+                <div class="card">
+                    <h3>四、技能重构的阵痛 <span class="cite">[cite: 121]</span></h3>
+                    <p>传统软件工程师的职业护城河正面临解构。初级代码打字员的生存空间被极度压缩。<span class="cite">[cite: 122, 123]</span> 未来的超级个体必须具备极致的解构与架构模块化能力、从工具使用者向AI代理编排者的跃迁能力，以及坚不可摧的计算机科学底层信仰。<span class="cite">[cite: 124]</span></p>
+                </div>
+            </div>
+        </div>
         
-        <!-- Section 1: Intro / Hero -->
-        <section id="section-intro" class="mb-16 pt-4">
-            <div class="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -z-10"></div>
-                <div class="inline-block px-3 py-1 bg-blue-100 text-seu-blue text-sm font-semibold rounded-full mb-4">
-                    实证调研报告 / 计算机类人才演进
-                </div>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-                    码动未来，云端问道<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-seu-blue to-ali-orange text-2xl md:text-4xl">AI编程行业现状、开发者生存与技能重构</span>
-                </h1>
-                <p class="report-text text-lg mb-8 max-w-3xl">
-                    本报告基于东南大学“码动未来”实践团于2026年2月赴阿里巴巴（杭州西溪园区）的实地考察与专家深度访谈。旨在解答：在大模型（LLM）推动软件工程从“手写代码”向“AI协同”根本性转型的当下，初级开发者的核心竞争力何在？高校教育与产业前沿的“时差”应如何弥合？
-                </p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-slate-100 pt-6 mt-6">
-                    <div>
-                        <p class="text-sm text-slate-400">调研时间</p>
-                        <p class="font-semibold">2026年1月-3月</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-slate-400">实地坐标</p>
-                        <p class="font-semibold">杭州·阿里西溪园区</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-slate-400">核心对象</p>
-                        <p class="font-semibold">阿里“十年陈”技术专家</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-slate-400">研究产出</p>
-                        <p class="font-semibold text-ali-orange">10,000+字实证数据</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="section">
+            <h2 class="section-title">青年工程师的破局法则 <span class="cite">[cite: 136]</span></h2>
+            <p>本次调研化身为一把锋利的手术刀，果断切开了传统教育体系下的信息茧房。<span class="cite">[cite: 135]</span> 时代抛弃一个传统的代码工人，往往连一句再见都不会说。但对于那些具备敏锐技术嗅觉与坚韧底层信仰的青年学子而言，2026年绝不是悲观的终点，而是超级个体崛起的破晓。<span class="cite">[cite: 137]</span></p>
+            <p>借助新媒体平台的传播，公众切实感受到了东大青年学子“为中国式现代化挺膺担当”的务实作风与时代风貌。<span class="cite">[cite: 144]</span></p>
+        </div>
 
-        <!-- Section 2: Background -->
-        <section id="section-background" class="mb-16 pt-16 -mt-16">
-            <h2 class="text-2xl font-bold mb-6 flex items-center">
-                <span class="w-2 h-8 bg-seu-blue mr-3 inline-block rounded"></span>
-                大厂的“高墙”与泡沫的破裂 (2025倒春寒)
-            </h2>
-            <p class="report-text mb-6">
-                本模块旨在揭示当前AI编程行业的宏观环境。我们通过文献调研和数据分析发现，如果说2024年是AI coding的狂欢元年，那么2025年对于许多程序员而言，无疑是一场始料未及的“倒春寒”。科技巨头在AI应用上呈现出极其矛盾但又合乎商业逻辑的行为：**一方面大力裁撤边缘开发岗位，另一方面全面封杀第三方AI编程工具。**
-            </p>
+    </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mb-8">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-bold mb-4 text-slate-800">为何筑起“高墙”？数据主权焦虑</h3>
-                    <p class="report-text text-sm">
-                        快手、字节跳动（禁用Cursor转用自研Tree）、亚马逊等巨头纷纷限制外部AI工具。核心原因在于**数据主权**。在AI时代，代码不仅是逻辑，更是企业的核心资产。<br><br>当数以万计的工程师在Cursor的对话框中粘贴业务逻辑、核心算法和未公开架构时，这些无价商业机密正在向外部服务器回传。大厂宁可牺牲短期效率，也要坚决切断外部工具，折射出AI时代全新的安全博弈。
-                    </p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-bold mb-4 text-slate-800">泡沫破裂：“人人都是程序员”的幻象</h3>
-                    <p class="report-text text-sm">
-                        随着大厂封杀和散户离场，Web Coding的流量在2025年出现了断崖式下跌。单纯依靠“一句话生成应用”的理念在复杂商业环境中被证伪。<br><br>
-                        真实的行业现状是：AI能解决单点逻辑，但无法解决复杂架构的耦合与业务理解。纯技术性的“搬砖工种”（初、中、高级甚至部分架构师）正面临被全面替代的风险。
-                    </p>
-                </div>
-            </div>
-
-            <!-- Chart Container -->
-            <div class="mb-8">
-                <h3 class="text-center font-bold text-slate-700 mb-2">行业趋势：外部AI工具流量 vs 内部自研工具使用率 (概念模型)</h3>
-                <p class="text-center text-sm text-slate-500 mb-4">数据反映了从“全网狂热”到“巨头闭环”的演变过程</p>
-                <div class="chart-container">
-                    <canvas id="trendChart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Expert Interview -->
-        <section id="section-expert" class="mb-16 pt-16 -mt-16">
-            <h2 class="text-2xl font-bold mb-6 flex items-center">
-                <span class="w-2 h-8 bg-ali-orange mr-3 inline-block rounded"></span>
-                核心洞察：阿里西溪园区专家深度访谈实录
-            </h2>
-            <p class="report-text mb-6">
-                为了探寻真实答案，实践团于2026年2月1日深入阿里巴巴西溪园区，与一位拥有20年开发经验（“十年陈”）的资深技术专家进行了面对面访谈。以下通过交互式面板呈现访谈的精华与深度复盘。
-            </p>
-
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                <!-- Tabs -->
-                <div class="flex border-b border-slate-200 bg-slate-50 overflow-x-auto">
-                    <button class="tab-btn active px-6 py-4 text-sm font-medium whitespace-nowrap focus:outline-none" onclick="openTab(event, 'tab-myth')">误区：基础课没用了？</button>
-                    <button class="tab-btn px-6 py-4 text-sm font-medium whitespace-nowrap focus:outline-none" onclick="openTab(event, 'tab-books')">震撼：技术书籍已“死”</button>
-                    <button class="tab-btn px-6 py-4 text-sm font-medium whitespace-nowrap focus:outline-none" onclick="openTab(event, 'tab-future')">暴论：谁将被取代？</button>
-                </div>
-
-                <!-- Tab Contents -->
-                <div id="tab-myth" class="tab-content p-6 md:p-8 block">
-                    <h3 class="text-xl font-bold mb-4 text-seu-blue">关于高校教育与基本功</h3>
-                    <div class="mb-4">
-                        <span class="font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded text-sm mr-2">实践团提问</span>
-                        <span class="text-slate-600">现在AI写代码这么厉害，是不是大学里的《数据结构》、《编译原理》等基础课已经不重要了？</span>
-                    </div>
-                    <div class="quote-block">
-                        <span class="font-bold text-ali-orange block mb-2">专家解答：这是一个致命的误区！</span>
-                        “我反而认为打好基本功在AI时代更加必要。AI擅长重复性和经验性的工作，但原创性、底层的算法逻辑它依然会出错。如果开发者不懂底层逻辑，当AI生成了一段存在隐蔽内存泄漏的代码时，你根本无从排查。”
-                    </div>
-                    <p class="report-text text-sm mt-4">
-                        **分析结论**：AI降低了“编写（Typing）”的门槛，却极大拔高了“审查（Review）”和“纠错（Debugging）”的门槛。未来的开发者必须具备“裁判员”的素质，而裁判的基础就是深厚的计算机科学基本功。
-                    </p>
-                </div>
-
-                <div id="tab-books" class="tab-content p-6 md:p-8 hidden">
-                    <h3 class="text-xl font-bold mb-4 text-seu-blue">一个20年老兵的心态复盘</h3>
-                    <div class="flex flex-col md:flex-row gap-8 items-center">
-                        <div class="flex-1">
-                            <div class="quote-block">
-                                “非常有意思，我床头那本《Java程序员修炼之道》已经完全不需要看了。我办公室后面这整排书架，60%以上我以前读过的技术书籍，在现在的AI面前已经失去了大部分价值。这不是说知识没用了，而是AI已经接管了‘如何写’这个层面。”
-                            </div>
-                            <p class="report-text text-sm">
-                                专家指出，语法API、框架基础配置等“说明书式”的知识储备已经贬值。开发者大脑的算力应该从“记忆API”转移到“系统架构设计”和“业务领域建模”上。
-                            </p>
-                        </div>
-                        <div class="flex-1 w-full">
-                            <div class="chart-container" style="height: 250px; max-height: 250px;">
-                                <canvas id="booksChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="tab-future" class="tab-content p-6 md:p-8 hidden">
-                    <h3 class="text-xl font-bold mb-4 text-seu-blue">技术人员的终局预测</h3>
-                    <p class="report-text text-sm mb-4">
-                        基于行业观察，专家提出了一个引人深思的“暴论”：
-                    </p>
-                    <div class="bg-red-50 border border-red-100 p-5 rounded-lg mb-4">
-                        <p class="text-slate-700 italic font-medium">
-                            “无论是初级、中级、高级程序员，甚至是某些架构师……只要是在这个技术体系内单纯‘搬砖’的人（只是脑力劳动水平比较高），他们的工作都可以被AI取代，而且很快，我个人估计就是2026年年底。”
-                        </p>
-                    </div>
-                    <p class="report-text text-sm">
-                        **什么样的人不会被淘汰？**<br>
-                        世界和软件行业未来需要的，一定是具有**创造力、想象力、领导力的复合型人才**。未来的程序员不再是埋头苦干的码农，而是要变成“项目经理”——AI是手下的兵，程序员负责指挥、分配任务、验收成果。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Skills -->
-        <section id="section-skills" class="mb-16 pt-16 -mt-16">
-            <h2 class="text-2xl font-bold mb-6 flex items-center">
-                <span class="w-2 h-8 bg-seu-blue mr-3 inline-block rounded"></span>
-                生存样本：从“码农”到“AI操控师”的技能重构
-            </h2>
-            <p class="report-text mb-6">
-                通过实地调研与专家共创，我们总结出了一套适应2026年及以后技术生态的“开发者技能模型”。这并非要求放弃技术，而是要求技能树的**权重发生转移**。
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-xl shadow-sm border border-slate-100 mb-12">
-                <div>
-                    <h3 class="text-lg font-bold mb-4">专家给出的三条核心转型建议：</h3>
-                    <ul class="space-y-4">
-                        <li class="flex">
-                            <span class="text-ali-orange font-bold mr-3 text-xl">1.</span>
-                            <div>
-                                <strong class="text-slate-800 block">拥抱应用层框架</strong>
-                                <span class="text-sm text-slate-600">学会利用 Spring AI、LangChain 等框架去开发企业级的AI应用，而不能仅仅停留在“会用ChatGPT聊天”的表面玩家层次。</span>
-                            </div>
-                        </li>
-                        <li class="flex">
-                            <span class="text-ali-orange font-bold mr-3 text-xl">2.</span>
-                            <div>
-                                <strong class="text-slate-800 block">培养解耦与管理能力</strong>
-                                <span class="text-sm text-slate-600">未来程序员要兼任项目经理和架构师。面对复杂系统，需要有能力将大问题拆解（解耦）为AI可以处理的小任务，并负责分配、跟踪和验证。</span>
-                            </div>
-                        </li>
-                        <li class="flex">
-                            <span class="text-ali-orange font-bold mr-3 text-xl">3.</span>
-                            <div>
-                                <strong class="text-slate-800 block">关注“去中心化”编程与自然语言</strong>
-                                <span class="text-sm text-slate-600">未来最常用的编程语言可能是“英语（自然语言）”。要理解技术的边界，明白哪些苦活累活交给AI，哪些核心业务命脉必须握在自己手里。</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="w-full">
-                    <h3 class="text-center font-bold text-slate-700 mb-2">能力雷达图：传统码农 vs 进化后开发者</h3>
-                    <div class="chart-container" style="background: transparent; box-shadow: none; border: none;">
-                        <canvas id="skillsRadarChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GEMINI API INTEGRATION: AI Career Advisor -->
-            <div class="ai-gradient-border p-6 md:p-8 bg-white shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <span class="text-8xl">✨</span>
-                </div>
-                <h3 class="text-2xl font-bold mb-2 flex items-center text-slate-800">
-                    <span class="text-purple-600 mr-2">✨</span> 开发者生存诊断室 (Powered by Gemini)
-                </h3>
-                <p class="text-slate-500 text-sm mb-6 max-w-2xl">
-                    基于本次调研的阿里专家洞察模型，大语言模型将扮演资深技术专家。输入你当前的技能栈或学习路线，获取一份“犀利、直击痛点”的AI时代生存能力评估与转型建议。
-                </p>
-
-                <div class="space-y-4 relative z-10">
-                    <div>
-                        <label for="user-skills" class="block text-sm font-medium text-slate-700 mb-1">你当前的技能栈 / 工作日常内容：</label>
-                        <textarea id="user-skills" rows="3" class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition" placeholder="例如：熟练使用 Java 和 SpringBoot 增删改查，会一点 Vue，目前在公司主要负责维护老旧的内部系统后台接口..."></textarea>
-                    </div>
-                    <button id="btn-evaluate" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center w-full md:w-auto">
-                        <span id="btn-text">生成我的技能重构诊断书 ✨</span>
-                        <div id="btn-loader" class="loader hidden ml-3 border-white border-t-purple-200"></div>
-                    </button>
-                </div>
-
-                <!-- AI Response Container -->
-                <div id="ai-response-container" class="mt-6 hidden">
-                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-6">
-                        <div class="flex items-center mb-4 pb-4 border-b border-slate-200">
-                            <div class="w-10 h-10 rounded-full bg-ali-orange text-white flex items-center justify-center font-bold text-xl mr-3 shadow-inner">阿</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">阿里“十年陈”技术专家 (AI分身)</h4>
-                                <p class="text-xs text-slate-500">基于《码动未来》实证调研数据生成</p>
-                            </div>
-                        </div>
-                        <div id="ai-response-content" class="text-slate-700 text-sm leading-relaxed space-y-3">
-                            <!-- Gemini output will be injected here -->
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Error Container -->
-                <div id="ai-error-container" class="mt-4 hidden p-4 bg-red-50 text-red-600 rounded-lg text-sm border border-red-200">
-                </div>
-            </div>
-            
-        </section>
-
-        <!-- Section 5: Education & Conclusion -->
-        <section id="section-education" class="mb-16 pt-16 -mt-16">
-            <h2 class="text-2xl font-bold mb-6 flex items-center">
-                <span class="w-2 h-8 bg-slate-800 mr-3 inline-block rounded"></span>
-                产教错配的破局与实践历程
-            </h2>
-            
-            <div class="bg-slate-800 text-white p-8 rounded-xl mb-8">
-                <h3 class="text-xl font-bold mb-4 text-ali-orange">核心科学问题：高等教育的“时差”</h3>
-                <p class="text-slate-300 leading-relaxed text-sm mb-4">
-                    本项目（码动未来团队）的调研缘起于一个尖锐的现实痛点：**技术范式重构下的“供需错配”**。当前本科教学体系依然侧重于确定性编程和基础语法，难以实时覆盖产业界日新月异的“云原生”、“MaaS（模型即服务）”等工程实践。
-                </p>
-                <p class="text-slate-300 leading-relaxed text-sm">
-                    本次阿里西溪园区实地调研的核心价值在于，将产业界最真实、最残酷的生存法则带回校园，帮助准开发者建立务实的职业观，校准个人技能树，为高校教育改革提供一线实证数据。
-                </p>
-            </div>
-
-            <!-- Practice Timeline -->
-            <h3 class="text-lg font-bold mb-6 text-slate-800">实践日程追踪 (2026寒假)</h3>
-            <div class="relative border-l-2 border-seu-blue ml-4 md:ml-6 space-y-8 pb-4">
-                
-                <div class="relative pl-8">
-                    <div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-white border-4 border-seu-blue"></div>
-                    <div class="text-sm text-slate-400 font-bold">Jan 23 - Jan 27, 2026</div>
-                    <h4 class="text-md font-bold text-slate-800 mt-1">筹备与文献调研阶段</h4>
-                    <p class="text-sm text-slate-600 mt-1">团队集结，查阅大厂AI工具禁令、大模型技术演进等相关文献，完成物资整备。</p>
-                </div>
-
-                <div class="relative pl-8">
-                    <div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-ali-orange border-4 border-white shadow-md"></div>
-                    <div class="text-sm text-ali-orange font-bold">Jan 28 - Feb 01, 2026</div>
-                    <h4 class="text-md font-bold text-slate-800 mt-1">杭州实地考察与深度访谈 (核心)</h4>
-                    <p class="text-sm text-slate-600 mt-1">赴杭州余杭区文一西路969号阿里西溪园区。2月1日，正式深度访谈阿里事业部技术专家。</p>
-                </div>
-
-                <div class="relative pl-8">
-                    <div class="absolute -left-2 top-1 w-4 h-4 rounded-full bg-white border-4 border-seu-blue"></div>
-                    <div class="text-sm text-slate-400 font-bold">Feb 02 - Mar 01, 2026</div>
-                    <h4 class="text-md font-bold text-slate-800 mt-1">数据分析、材料产出与答辩准备</h4>
-                    <p class="text-sm text-slate-600 mt-1">整理数万字访谈原素材，提炼洞察。制作总结推文、视频，撰写本篇万字级别深度实证调研报告，准备结项答辩。</p>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center border-t border-slate-200 pt-8">
-                <p class="text-sm text-slate-500 font-semibold mb-2">青春为中国式现代化挺膺担当</p>
-                <p class="text-xs text-slate-400">© 2026 东南大学计算机科学与工程学院、软件学院、人工智能学院 - 码动未来实践团</p>
-            </div>
-        </section>
-
-    </main>
+    <footer>
+        <p>东南大学计软智学院 码动未来团队 版权所有 © 2026 <span class="cite">[cite: 11, 13]</span></p>
+        <p>CO DE THE FUTURE · DREAM IN CLOUD <span class="cite">[cite: 181]</span></p>
+    </footer>
 
     <script>
-        // Data and Logic for Interactive Elements
-
-        // 1. ScrollSpy functionality for sidebar navigation
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const scrollY = window.pageYOffset;
-
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight;
-                const sectionTop = section.offsetTop - 150; // Offset for header/padding
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current) && current !== "") {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const sidebar = document.getElementById('sidebar');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-            if(!sidebar.classList.contains('hidden')) {
-                sidebar.classList.add('absolute', 'top-16', 'left-0', 'w-full', 'shadow-2xl');
-                sidebar.classList.remove('md:flex');
-            } else {
-                sidebar.classList.remove('absolute', 'top-16', 'left-0', 'w-full', 'shadow-2xl');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if(window.innerWidth < 768) {
-                    sidebar.classList.add('hidden');
-                }
-            });
-        });
-
-        // 2. Tab functionality for Expert Interview section
-        function openTab(evt, tabName) {
-            let i, tabcontent, tablinks;
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll('.section');
             
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("block");
-                tabcontent[i].classList.add("hidden");
-            }
-            
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-            
-            const selectedTab = document.getElementById(tabName);
-            selectedTab.style.display = "block";
-            selectedTab.classList.remove("hidden");
-            selectedTab.classList.add("block");
-            
-            evt.currentTarget.classList.add("active");
-        }
-
-        // 3. Chart.js Implementations
-        Chart.defaults.font.family = '"PingFang SC", "Microsoft YaHei", sans-serif';
-        Chart.defaults.color = '#64748b';
-
-        // Chart 1: Trend Chart
-        const ctxTrend = document.getElementById('trendChart').getContext('2d');
-        new Chart(ctxTrend, {
-            type: 'line',
-            data: {
-                labels: ['2023 Q4', '2024 Q1 (狂欢)', '2024 Q2', '2024 Q3', '2024 Q4 (封杀令)', '2025 Q1 (倒春寒)'],
-                datasets: [
-                    {
-                        label: '外部AI工具(如Cursor)使用热度',
-                        data: [20, 50, 95, 80, 40, 15],
-                        borderColor: '#ff6a00',
-                        backgroundColor: 'rgba(255, 106, 0, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: '大厂内部自研大模型调用频次',
-                        data: [10, 20, 35, 60, 85, 100],
-                        borderColor: '#005bac',
-                        backgroundColor: 'rgba(0, 91, 172, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom' }, tooltip: { mode: 'index', intersect: false } },
-                scales: { y: { display: false }, x: { grid: { display: false } } }
-            }
-        });
-
-        // Chart 2: Book/Knowledge Utility
-        const ctxBooks = document.getElementById('booksChart').getContext('2d');
-        new Chart(ctxBooks, {
-            type: 'doughnut',
-            data: {
-                labels: ['已丧失价值 (API/语法/配置)', '仍具核心价值 (架构/算法/业务)'],
-                datasets: [{ data: [60, 40], backgroundColor: ['#e2e8f0', '#005bac'], hoverOffset: 4, borderWidth: 0 }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false, cutout: '70%',
-                plugins: { legend: { position: 'right', labels: { boxWidth: 12 } } }
-            },
-            plugins: [{
-                id: 'textCenter',
-                beforeDraw: function(chart) {
-                    var width = chart.width, height = chart.height, ctx = chart.ctx;
-                    ctx.restore();
-                    var fontSize = (height / 114).toFixed(2);
-                    ctx.font = "bold " + fontSize + "em sans-serif";
-                    ctx.textBaseline = "middle";
-                    ctx.fillStyle = "#334155";
-                    var text = "60% 淘汰",
-                        textX = Math.round((width - ctx.measureText(text).width) / 2),
-                        textY = height / 2;
-                    ctx.fillText(text, width/2 - ctx.measureText(text).width/2 - 50, textY);
-                    ctx.save();
-                }
-            }]
-        });
-
-        // Chart 3: Skills Radar Chart
-        const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
-        new Chart(ctxRadar, {
-            type: 'radar',
-            data: {
-                labels: ['手写代码基础', '系统架构设计', '业务逻辑理解', 'AI指令与协同', '项目统筹与解耦'],
-                datasets: [
-                    {
-                        label: '传统“码农”模型',
-                        data: [90, 40, 50, 20, 30],
-                        fill: true, backgroundColor: 'rgba(100, 116, 139, 0.2)', borderColor: 'rgb(100, 116, 139)',
-                        pointBackgroundColor: 'rgb(100, 116, 139)', pointBorderColor: '#fff',
-                    },
-                    {
-                        label: '2026 未来开发者',
-                        data: [50, 85, 90, 95, 80],
-                        fill: true, backgroundColor: 'rgba(255, 106, 0, 0.2)', borderColor: '#ff6a00',
-                        pointBackgroundColor: '#ff6a00', pointBorderColor: '#fff',
-                    }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(0,0,0,0.1)' }, grid: { color: 'rgba(0,0,0,0.1)' },
-                        pointLabels: { font: { size: 12, family: '"PingFang SC", sans-serif' }, color: '#475569' },
-                        ticks: { display: false, min: 0, max: 100 }
-                    }
-                },
-                plugins: { legend: { position: 'bottom' } }
-            }
-        });
-
-        document.getElementById('tab-myth').style.display = 'block';
-
-        // 4. Gemini API Integration - AI Career Advisor
-        const apiKey = "AIzaSyCK45cMzlVWY9NiY1rWVQzUjD11mEklV_Y"; // API key will be injected by the environment
-        const btnEvaluate = document.getElementById('btn-evaluate');
-        const btnText = document.getElementById('btn-text');
-        const btnLoader = document.getElementById('btn-loader');
-        const userInput = document.getElementById('user-skills');
-        const responseContainer = document.getElementById('ai-response-container');
-        const responseContent = document.getElementById('ai-response-content');
-        const errorContainer = document.getElementById('ai-error-container');
-
-        // Exponential backoff fetch
-        async function fetchWithRetry(url, options, maxRetries = 5) {
-            let retries = 0;
-            const baseDelay = 1000;
-            
-            while (retries < maxRetries) {
-                try {
-                    const response = await fetch(url, options);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    retries++;
-                    if (retries >= maxRetries) {
-                        throw error;
-                    }
-                    const delay = baseDelay * Math.pow(2, retries - 1);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            }
-        }
-
-        btnEvaluate.addEventListener('click', async () => {
-            const skills = userInput.value.trim();
-            
-            if (!skills) {
-                alert("请先输入您的技能栈或工作日常！");
-                return;
-            }
-
-            // Update UI to loading state
-            btnEvaluate.disabled = true;
-            btnText.textContent = "AI 正在分析您的技能树...";
-            btnLoader.classList.remove('hidden');
-            responseContainer.classList.add('hidden');
-            errorContainer.classList.add('hidden');
-
-            const systemPrompt = `你现在是参与《码动未来》调研项目的阿里巴巴“十年陈”资深技术专家。你的语言风格专业、犀利、务实、直击痛点。
-请根据用户提供的当前技能栈，结合以下调研报告的核心观点，为他们提供一份【AI时代的技能重构诊断书】：
-1. 纯代码“搬砖”工种将在2026年底面临被淘汰的危机，基础API记忆已无价值。
-2. 必须拥抱 Spring AI、LangChain 等应用层框架，不能停留在“用ChatGPT聊天”层面。
-3. 需要培养复杂系统解耦与项目管理能力，成为“AI操控师”。
-4. 关注去中心化编程和自然语言沟通逻辑。
-5. 扎实的计算机基础（数据结构、底层算法）在AI排错时极为重要。
-
-请直接输出格式化的HTML代码（使用Tailwind CSS类名进行基础排版），以便直接渲染。
-格式要求：
-- 使用 <h4 class="text-lg font-bold text-seu-blue mb-2 mt-4"> 作为小标题
-- 使用 <p class="mb-3"> 作为段落
-- 使用 <ul class="list-disc pl-5 mb-3 space-y-1"> 和 <li> 作为列表
-- 使用 <strong class="text-ali-orange"> 强调重点痛点或结论
-不要包含 \`\`\`html 等markdown代码块标记，直接输出纯净的HTML结构。`;
-
-            const payload = {
-                contents: [{
-                    parts: [{ text: `用户的技能栈/工作描述：${skills}` }]
-                }],
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
-                }
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
             };
 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-            try {
-                const result = await fetchWithRetry(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
                 });
+            }, observerOptions);
 
-                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                
-                if (generatedText) {
-                    // Clean up potential markdown code block markers
-                    const cleanHtml = generatedText.replace(/```html/g, '').replace(/```/g, '').trim();
-                    responseContent.innerHTML = cleanHtml;
-                    responseContainer.classList.remove('hidden');
-                    
-                    // Scroll to response
-                    responseContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    throw new Error("模型未返回有效内容");
-                }
-
-            } catch (error) {
-                console.error("Gemini API Error:", error);
-                errorContainer.textContent = "抱歉，由于网络波动或API限制，AI诊断暂时不可用，请稍后再试。";
-                errorContainer.classList.remove('hidden');
-            } finally {
-                // Restore UI
-                btnEvaluate.disabled = false;
-                btnText.textContent = "生成我的技能重构诊断书 ✨";
-                btnLoader.classList.add('hidden');
-            }
+            sections.forEach(section => {
+                observer.observe(section);
+            });
         });
-
     </script>
 </body>
 </html>
